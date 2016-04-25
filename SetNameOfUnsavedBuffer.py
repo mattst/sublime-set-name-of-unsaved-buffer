@@ -9,14 +9,6 @@
 #
 # ST Command:     set_name_of_unsaved_buffer
 #
-# Set the keys in your .sublime-keymap file with:
-#
-# { "keys": [""], "command": "set_name_of_unsaved_buffer" }
-#
-# For use in the command palette add the line below to Default.sublime-commands:
-#
-# { "caption": "Set Name of Unsaved Buffer", "command": "set_name_of_unsaved_buffer" },
-#
 
 import sublime, sublime_plugin
 
