@@ -1,7 +1,7 @@
 
 ## Set Name Of Unsaved Buffer - Plugin for Sublime Text
 
-This is a simple Sublime Text plugin which allows the user to quickly and easily set the name of an unsaved buffer so that the name is shown in the buffer's file tab, in the drop-down list of files, and in the show files overlay.
+This is a simple Sublime Text plugin which allows the user to quickly and easily set the name of an unsaved buffer so that the name is shown in the buffer's filename tab, in the side bar, in the drop-down list of files, and in the show files overlay.
 
 When the plugin is run it will display an input panel for the user to enter a name for the unsaved file. The plugin will not allow users to change the name of a saved file for obvious reasons. [Note that entering a path as the name is inadvisable because the file's name would be a path but no path would be set.]
 
