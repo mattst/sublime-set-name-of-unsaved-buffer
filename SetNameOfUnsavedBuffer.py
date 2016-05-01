@@ -14,7 +14,12 @@ import sublime, sublime_plugin
 
 class SetNameOfUnsavedBuffer(sublime_plugin.TextCommand):
     """
-    A Sublime Text plugin to set the displayed name of an unsaved buffer.
+    A Sublime Text plugin to set the name of an unsaved buffer. The name will be shown
+    in the files tab bar, in the side bar, in the drop-down files list, and in the show
+    files overlay. If the user saves the file then the name will be presented to them
+    in a save-as dialog box to allow the user to select the directory to save in; note
+    that entering a path as the name will not change this behaviour and doing so is
+    inadvisable because the file's name would be a path but no path would be set.
     """
 
     def run(self, edit):
@@ -22,38 +27,47 @@ class SetNameOfUnsavedBuffer(sublime_plugin.TextCommand):
         Called when the plugin is run by the user.
         """
 
-        # Abort the plugin if there is a file loading in the buffer.
+        # Abort the plugin if a file is loading in the buffer, if the buffer contains
+        # a saved file, or if the plugin has been run from a widget (panel or overlay).
 
         if self.view.is_loading():
-            msg = "set_name_of_unsaved_buffer plugin: a file is loading in this buffer"
-            sublime.status_message(msg)
+            self.show_error_message("a file is loading in this buffer")
             return
 
-        # Abort the plugin if the buffer contains a saved file.
+        if self.view.file_name():
+            self.show_error_message("this buffer contains a saved file")
+            return
 
-        if self.view.file_name() is not None:
-            msg = "set_name_of_unsaved_buffer plugin: this buffer contains a saved file"
-            sublime.status_message(msg)
+        if self.view.settings().get('is_widget'):
+            self.show_error_message("run from a buffer not from a panel or overlay")
             return
 
         # Open an input panel for the user to enter a name for the unsaved buffer.
 
         msg =  "Enter a name for the unsaved buffer:"
-        self.view.window().show_input_panel(msg, "", self.on_done, None, None)
+        self.view.window().show_input_panel(msg, "", self.set_name, None, None)
 
 
-    def on_done(self, text):
+    def set_name(self, name_for_buffer):
         """
         Called when the user accepts the input panel.
         """
 
-        # Abort the plugin if the user did not enter any text in the input panel.
+        # Abort if the user did not enter any text in the input panel.
 
-        if len(text) < 1:
-            msg = "set_name_of_unsaved_buffer plugin: nothing was entered in the panel"
-            sublime.status_message(msg)
+        if not name_for_buffer:
+            self.show_error_message("no name was entered for the buffer")
             return
 
         # Set the name of the unsaved buffer.
 
-        self.view.set_name(text)
+        self.view.set_name(name_for_buffer)
+
+
+    def show_error_message(self, err_msg):
+        """
+        Displays the error message "err_msg".
+        """
+
+        err_msg_prefix = "set_name_of_unsaved_buffer plugin: "
+        sublime.status_message(err_msg_prefix + err_msg)
