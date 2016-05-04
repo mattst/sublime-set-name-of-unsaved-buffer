@@ -16,10 +16,10 @@ class SetNameOfUnsavedBuffer(sublime_plugin.TextCommand):
     """
     A Sublime Text plugin to set the name of an unsaved buffer. The name will be shown
     in the files tab bar, in the side bar, in the drop-down files list, and in the show
-    files overlay. If the user saves the file then the name will be presented to them
-    in a save-as dialog box to allow the user to select the directory to save in; note
-    that entering a path as the name will not change this behaviour and doing so is
-    inadvisable because the file's name would be a path but no path would be set.
+    files overlay. The purpose of the plugin is so that temporary buffers can be given
+    a name and thereby switched to easily, this is especially useful if more than one
+    temporary buffer is in use. Note that entering a path as the name is inadvisable
+    because the file's name would be a path but no path would be set.
     """
 
     def run(self, edit):
