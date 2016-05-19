@@ -12,7 +12,7 @@
 
 import sublime, sublime_plugin
 
-class SetNameOfUnsavedBuffer(sublime_plugin.TextCommand):
+class SetNameOfUnsavedBufferCommand(sublime_plugin.TextCommand):
     """
     A Sublime Text plugin to set the name of an unsaved buffer. The name will be shown
     in the files tab bar, in the side bar, in the drop-down files list, and in the show
