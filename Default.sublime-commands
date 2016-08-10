@@ -1,8 +1,4 @@
 [
     { "caption": "Set Name of Unsaved Buffer",
-      "command": "set_name_of_unsaved_buffer" },
-
-    { "caption": "Set Name of Unsaved Buffer (Mark Buffer as Scratch)",
-      "command": "set_name_of_unsaved_buffer",
-      "args": {"set_scratch": true} }
+      "command": "set_name_of_unsaved_buffer" }
 ]
