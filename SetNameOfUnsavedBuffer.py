@@ -1,15 +1,18 @@
 
 #
-# Name:          Set Name Of Unsaved Buffer
+# Name:      Set Name Of Unsaved Buffer
 #
-# Requirements:  Plugin for Sublime Text v2 and v3
+# Requires:  Sublime Text v2 or v3 (plugin)
 #
-# Written by:    mattst - https://github.com/mattst
+# Command:   set_name_of_unsaved_buffer
 #
-# ST Command:    set_name_of_unsaved_buffer
+# Author:    mattst - https://github.com/mattst
 #
-# License:       MIT License
+# Web Page:  https://github.com/mattst/sublime-set-name-of-unsaved-buffer
 #
+# License:   MIT License
+#
+
 
 import sublime, sublime_plugin
 
@@ -31,17 +34,18 @@ class SetNameOfUnsavedBufferCommand(sublime_plugin.TextCommand):
 
         # The plugin is only enabled for unsaved buffers.
 
-        if (self.view.file_name()
-         or self.view.is_loading()
-         or self.view.settings().get("is_widget")):
-            msg = "the plugin can only be run from an unsaved buffer"
-            sublime.status_message(msg)
-            return False
-
-        return True
+        return self.view.file_name() is None
 
 
     def run(self, edit):
+
+        # Prevent the user from attempting to
+        # change the name of a panel or overlay.
+
+        if self.view.settings().get("is_widget"):
+            msg = "run from an unsaved buffer not a panel or overlay"
+            sublime.status_message(msg)
+            return
 
         msg =  "Enter a name for the unsaved buffer:"
 
@@ -49,20 +53,18 @@ class SetNameOfUnsavedBufferCommand(sublime_plugin.TextCommand):
                            self.on_panel_done, None, None)
 
 
-    def on_panel_done(self, name_for_buffer):
+    def on_panel_done(self, buffer_name):
 
-        name_for_buffer = name_for_buffer.strip()
+        buffer_name = buffer_name.strip()
 
-        if not name_for_buffer:
-            msg = "no name was entered for the unsaved buffer"
-            sublime.status_message(msg)
+        if not buffer_name:
             return
 
-        self.view.set_name(name_for_buffer)
+        self.view.set_name(buffer_name)
 
         # The bug workaround must be done by another TextCommand;
-        # an edit object is required and the edit object that was
-        # passed to run() expired as soon as run() returned.
+        # an edit object is needed for it and the edit object that
+        # was passed to run() expired as soon as run() returned.
 
         if is_sublime_text_3():
             command_name = "set_name_of_unsaved_buffer_bug_workaround"
@@ -71,20 +73,16 @@ class SetNameOfUnsavedBufferCommand(sublime_plugin.TextCommand):
 
 class SetNameOfUnsavedBufferBugWorkaroundCommand(sublime_plugin.TextCommand):
     """
-    There is a bug in Sublime Text 3 when using set_name(); after it has been
-    called the new name will not be shown anywhere until after the buffer has
-    been modified in some way, i.e. a character is inserted or deleted. This
-    command is a workaround for that bug and it simply inserts a space at the
-    end of the buffer and then immediately deletes it. The bug report can be
-    viewed at this url: https://github.com/SublimeTextIssues/Core/issues/1180
+    There is a bug in Sublime Text 3 when using set_name(); in some cases when
+    it is called the new name will not get properly set until after the buffer
+    has been altered, i.e. a character is inserted or deleted. This class is a
+    workaround for that bug and it simply inserts and deletes a space at the
+    end of the buffer. The bug is not present in Sublime Text 2. More info is
+    in my bug report @: https://github.com/SublimeTextIssues/Core/issues/1180
     """
 
     def run(self, edit):
 
-        end_pos = self.view.size()
-
-        num_chars_inserted = self.view.insert(edit, end_pos, " ")
-
-        if num_chars_inserted == 1:
-            erase_region = sublime.Region(end_pos, end_pos + 1)
-            self.view.erase(edit, erase_region)
+        pos = self.view.size()
+        if self.view.insert(edit, pos, " ") == 1:
+            self.view.erase(edit, sublime.Region(pos, pos + 1))
