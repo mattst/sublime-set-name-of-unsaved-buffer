@@ -29,19 +29,19 @@ This package has not been submitted to the official [Package Control](http://pac
 
 To install:
 
-- Open the Command Palette and select `Package Control: Add Repository`
-- Enter this url: `https://github.com/mattst/sublime-set-name-of-unsaved-buffer`
-- Open the Command Palette and select `Package Control: Install Package`
-- Select `Set Name Of Unsaved Buffer`
+- Open the Command Palette and select: `Package Control: Add Repository`
+- Paste this url into the input panel: `https://github.com/mattst/sublime-set-name-of-unsaved-buffer`
+- Open the Command Palette and select: `Package Control: Install Package`
+- Select: `Set Name Of Unsaved Buffer`
 
 If updates are made to this package then Package Control will install them automatically as usual.
 
 To uninstall:
 
-- Open the Command Palette and select `Package Control: Remove Package`
-- Select `Set Name Of Unsaved Buffer` in the list
-- Open the Command Palette and select `Package Control: Remove Repository`
-- Select `https://github.com/mattst/sublime-set-name-of-unsaved-buffer`
+- Open the Command Palette and select: `Package Control: Remove Package`
+- Select: `Set Name Of Unsaved Buffer`
+- Open the Command Palette and select: `Package Control: Remove Repository`
+- Select: `https://github.com/mattst/sublime-set-name-of-unsaved-buffer`
 
 
 #### Usage
