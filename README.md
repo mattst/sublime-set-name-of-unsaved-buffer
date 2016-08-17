@@ -5,7 +5,7 @@ This is a simple Sublime Text plugin which allows the user to quickly and easily
 
 When the plugin is run it will display an input panel for the user to enter a name for the unsaved buffer. The plugin can only be run from unsaved buffers.
 
-It is such a simple plugin that there are no plans to submit it to [Package Control](http://packagecontrol.io), so anyone who wants to use it will have to install it manually.
+It is such a simple plugin that there are no plans to submit it to [Package Control](http://packagecontrol.io).
 
 #### Requirements
 
@@ -13,7 +13,7 @@ It is such a simple plugin that there are no plans to submit it to [Package Cont
 
 #### Installation
 
-Manual installation only.
+###### Manual Installation
 
 - Download this repository's [ZIP file](https://github.com/mattst/sublime-set-name-of-unsaved-buffer/archive/master.zip) and extract it or use `git clone` to get the files.
 
@@ -22,6 +22,27 @@ Manual installation only.
     - Linux: `~/.config/sublime-text-3/Packages/SetNameOfUnsavedBuffer/`
     - OS X: `~/Library/Application Support/Sublime Text 3/Packages/SetNameOfUnsavedBuffer/`
     - Windows: `%APPDATA%\Sublime Text 3\Packages\SetNameOfUnsavedBuffer\`
+
+###### Package Control
+
+This package has not been submitted to the official [Package Control](http://packagecontrol.io) channel but Package Control can install single repositories, see *Add Repository* in the [Package Control usage section](https://packagecontrol.io/docs/usage).
+
+To install:
+
+- Open the Command Palette and select `Package Control: Add Repository`
+- Enter this url: `https://github.com/mattst/sublime-set-name-of-unsaved-buffer`
+- Open the Command Palette and select `Package Control: Install Package`
+- Select `Set Name Of Unsaved Buffer`
+
+If updates are made to this package then Package Control will install them automatically as usual.
+
+To uninstall:
+
+- Open the Command Palette and select `Package Control: Remove Package`
+- Select `Set Name Of Unsaved Buffer` in the list
+- Open the Command Palette and select `Package Control: Remove Repository`
+- Select `https://github.com/mattst/sublime-set-name-of-unsaved-buffer`
+
 
 #### Usage
 
