@@ -83,6 +83,7 @@ class SetNameOfUnsavedBufferBugWorkaroundCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
 
+        single_space = " "
         pos = self.view.size()
-        if self.view.insert(edit, pos, " ") == 1:
+        if self.view.insert(edit, pos, single_space) == 1:
             self.view.erase(edit, sublime.Region(pos, pos + 1))
